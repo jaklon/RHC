@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RHC - Roblox Holic Community</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        rhc: {
+                            main: '#FF2E2E', // Merah Roblox
+                            dark: '#111827', // Background gelap
+                            accent: '#1F2937' // Abu-abu gelap
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Animasi Fade In sederhana */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-rhc-dark text-white font-sans antialiased overflow-x-hidden">
+
+    <nav class="fixed w-full z-50 bg-rhc-dark/90 backdrop-blur-md border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer">
+                    <i class="fa-solid fa-gamepad text-rhc-main text-3xl"></i>
+                    <span class="font-bold text-2xl tracking-tighter">RHC<span class="text-rhc-main">.</span></span>
+                </div>
+                
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#home" class="hover:text-rhc-main px-3 py-2 rounded-md text-sm font-medium transition">Beranda</a>
+                        <a href="#about" class="hover:text-rhc-main px-3 py-2 rounded-md text-sm font-medium transition">Tentang Kami</a>
+                        <a href="#features" class="hover:text-rhc-main px-3 py-2 rounded-md text-sm font-medium transition">Keunggulan</a>
+                        <a href="#join" class="bg-rhc-main hover:bg-red-700 text-white px-4 py-2 rounded-full text-sm font-bold transition transform hover:scale-105">Gabung Sekarang</a>
+                    </div>
+                </div>
+
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" onclick="toggleMenu()" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="md:hidden hidden bg-rhc-accent" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Beranda</a>
+                <a href="#about" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Tentang Kami</a>
+                <a href="#features" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Keunggulan</a>
+                <a href="#join" class="text-rhc-main font-bold block px-3 py-2 rounded-md text-base">Gabung Sekarang</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="relative h-screen flex items-center justify-center bg-[url('https://images.unsplash.com/photo-1552820728-8b83bb6b773f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center bg-no-repeat bg-fixed">
+        <div class="absolute inset-0 bg-gradient-to-b from-rhc-dark/70 to-rhc-dark"></div>
+        
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto fade-in">
+            <span class="inline-block py-1 px-3 rounded-full bg-rhc-main/20 text-rhc-main text-sm font-semibold mb-4 border border-rhc-main/50">
+                OFFICIAL WEBSITE
+            </span>
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight">
+                Roblox Holic <span class="text-transparent bg-clip-text bg-gradient-to-r from-rhc-main to-orange-500">Community</span>
+            </h1>
+            <p class="text-gray-300 text-lg md:text-xl mb-8 max-w-2xl mx-auto">
+                Tempat berkumpulnya para pecinta Roblox Indonesia. Mabar, Turnamen, dan Berbagi Pengalaman seru di satu tempat.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#join" class="bg-rhc-main text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-red-600 transition shadow-lg shadow-red-500/30">
+                    <i class="fa-brands fa-discord mr-2"></i> Join Discord
+                </a>
+                <a href="#about" class="bg-transparent border border-gray-500 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-black transition">
+                    Pelajari Lebih Lanjut
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-10 bg-rhc-accent border-y border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center fade-in">
+                <div>
+                    <h3 class="text-4xl font-bold text-white">500+</h3>
+                    <p class="text-gray-400 mt-1">Member Aktif</p>
+                </div>
+                <div>
+                    <h3 class="text-4xl font-bold text-white">50+</h3>
+                    <p class="text-gray-400 mt-1">Turnamen</p>
+                </div>
+                <div>
+                    <h3 class="text-4xl font-bold text-white">24/7</h3>
+                    <p class="text-gray-400 mt-1">Mabar Nonstop</p>
+                </div>
+                <div>
+                    <h3 class="text-4xl font-bold text-white">TOP 1</h3>
+                    <p class="text-gray-400 mt-1">Komunitas Solid</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-20 bg-rhc-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
+                <div class="mb-10 lg:mb-0 fade-in">
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl border-2 border-gray-800">
+                        <img src="https://images.unsplash.com/photo-1624823180234-7221e78465cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Roblox Character" class="w-full h-auto object-cover hover:scale-105 transition duration-500">
+                        <div class="absolute bottom-0 left-0 bg-gradient-to-t from-black to-transparent p-6 w-full">
+                            <p class="text-white font-bold">Mainkan Blox Fruits, BedWars, & Lainnya!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="fade-in">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Apa itu <span class="text-rhc-main">RHC?</span></h2>
+                    <p class="text-gray-400 mb-6 text-lg leading-relaxed">
+                        Roblox Holic Community (RHC) didirikan untuk menyatukan pemain Roblox dari berbagai genre. Kami bukan sekadar grup mabar, tapi keluarga bagi mereka yang ingin bermain secara kompetitif maupun santai.
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check-circle text-rhc-main mt-1 mr-3"></i>
+                            <span class="text-gray-300">Lingkungan yang ramah dan anti-toxic.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check-circle text-rhc-main mt-1 mr-3"></i>
+                            <span class="text-gray-300">Event mingguan berhadiah Robux.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check-circle text-rhc-main mt-1 mr-3"></i>
+                            <span class="text-gray-300">Support untuk Youtuber/Streamer pemula.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="py-20 bg-rhc-accent relative overflow-hidden">
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-rhc-main/10 rounded-full blur-3xl"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Kenapa Harus Join RHC?</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Kami menyediakan fasilitas terbaik untuk mendukung hobi gaming kamu.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-rhc-dark p-8 rounded-2xl border border-gray-800 hover:border-rhc-main/50 transition duration-300 hover:-translate-y-2 fade-in">
+                    <div class="w-14 h-14 bg-rhc-main/10 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-gamepad text-2xl text-rhc-main"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Mabar Setiap Hari</h3>
+                    <p class="text-gray-400">Tidak perlu takut main sendirian lagi. Selalu ada teman yang siap menemani push rank atau grinding.</p>
+                </div>
+
+                <div class="bg-rhc-dark p-8 rounded-2xl border border-gray-800 hover:border-rhc-main/50 transition duration-300 hover:-translate-y-2 fade-in">
+                    <div class="w-14 h-14 bg-rhc-main/10 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-trophy text-2xl text-rhc-main"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Turnamen Rutin</h3>
+                    <p class="text-gray-400">Tunjukkan skillmu di turnamen RHC. BedWars, Blox Fruits, hingga Arsenal dengan hadiah menarik.</p>
+                </div>
+
+                <div class="bg-rhc-dark p-8 rounded-2xl border border-gray-800 hover:border-rhc-main/50 transition duration-300 hover:-translate-y-2 fade-in">
+                    <div class="w-14 h-14 bg-rhc-main/10 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa-brands fa-discord text-2xl text-rhc-main"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Discord Rapi</h3>
+                    <p class="text-gray-400">Server Discord yang terorganisir, bot musik, voice channel jernih, dan sistem role yang jelas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="py-20 bg-rhc-dark border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Galeri <span class="text-rhc-main">Keseruan</span></h2>
+                <p class="text-gray-400">Dokumentasi momen epic, kemenangan turnamen, dan kegilaan member RHC.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer fade-in">
+                    <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Turnamen BedWars" class="w-full h-64 object-cover transform transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                        <div class="text-center p-4">
+                            <h3 class="text-xl font-bold text-white mb-1">Turnamen BedWars</h3>
+                            <p class="text-gray-300 text-sm">Season 1 - Final Round</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer fade-in">
+                    <img src="https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Mabar Blox Fruits" class="w-full h-64 object-cover transform transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                        <div class="text-center p-4">
+                            <h3 class="text-xl font-bold text-white mb-1">Mabar Blox Fruits</h3>
+                            <p class="text-gray-300 text-sm">Hunting Sea Beast Ramai-ramai</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer fade-in">
+                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Gathering Discord" class="w-full h-64 object-cover transform transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                        <div class="text-center p-4">
+                            <h3 class="text-xl font-bold text-white mb-1">Gathering Discord</h3>
+                            <p class="text-gray-300 text-sm">Sesi Curhat & QnA Admin</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer fade-in">
+                    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Roblox Horror" class="w-full h-64 object-cover transform transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                        <div class="text-center p-4">
+                            <h3 class="text-xl font-bold text-white mb-1">Malam Jumat Horror</h3>
+                            <p class="text-gray-300 text-sm">Main The Mimic (Auto Teriak)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer fade-in">
+                    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Juara Turnamen" class="w-full h-64 object-cover transform transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                        <div class="text-center p-4">
+                            <h3 class="text-xl font-bold text-white mb-1">Hall of Fame</h3>
+                            <p class="text-gray-300 text-sm">Pemenang Event Bulanan</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer fade-in">
+                    <img src="https://images.unsplash.com/photo-1592478411213-61535f944886?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Komunitas" class="w-full h-64 object-cover transform transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                        <div class="text-center p-4">
+                            <h3 class="text-xl font-bold text-white mb-1">Meetup Virtual</h3>
+                            <p class="text-gray-300 text-sm">Foto bersama di lobby</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="join" class="py-20 bg-gradient-to-br from-rhc-main to-red-800 text-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
+        
+        <div class="max-w-4xl mx-auto px-4 relative z-10 fade-in">
+            <h2 class="text-3xl md:text-5xl font-extrabold text-white mb-6">Siap Menjadi Bagian dari RHC?</h2>
+            <p class="text-red-100 text-lg mb-8">
+                Bergabunglah dengan ratusan member lainnya sekarang juga. Gratis dan terbuka untuk semua player Roblox Indonesia!
+            </p>
+            <button onclick="https://discord.gg/mESSWkNK" class="bg-white text-rhc-main px-10 py-4 rounded-full font-bold text-xl shadow-xl hover:bg-gray-100 transition transform hover:scale-105">
+                <i class="fa-brands fa-discord mr-2"></i> Masuk Discord Server
+            </button>
+        </div>
+    </section>
+
+    <section id="members" class="py-20 bg-rhc-dark relative border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Hall of <span class="text-rhc-main">Fame</span></h2>
+                <p class="text-gray-400">Bertemu dengan para punggawa dan member elite RHC.</p>
+            </div>
+
+            <div id="member-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                </div>
+        </div>
+    </section>
+
+    <footer class="bg-black py-10 border-t border-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <span class="font-bold text-2xl tracking-tighter">RHC<span class="text-rhc-main">.</span></span>
+                    <p class="text-gray-500 text-sm mt-2">© 2023 Roblox Holic Community. All Rights Reserved.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white text-xl transition"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white text-xl transition"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white text-xl transition"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+<script>
+        // --- 1. DATA MEMBER RHC (Edit di sini) ---
+        const members = [
+            {
+                name: "Syla",
+                role: "Founder",
+                image: "https://tr.rbxcdn.com/30c98b672728493121528cb9389531c3/420/420/Image/Png", // Ganti dengan link avatar
+                quote: "King of Blox Fruits",
+                color: "text-red-500 border-red-500/50 bg-red-500/10"
+            },
+            {
+                name: "Mbonn",
+                role: "Co-Leader",
+                image: "https://tr.rbxcdn.com/5f7776512684803d5204481308332185/420/420/Image/Png",
+                quote: "Admin paling galak",
+                color: "text-blue-500 border-blue-500/50 bg-blue-500/10"
+            },
+            {
+                name: "Micaa",
+                role: "Moderator",
+                image: "https://tr.rbxcdn.com/d5a9c020583f769747981503c14c53c4/420/420/Image/Png",
+                quote: "Pantau chat 24 jam",
+                color: "text-green-500 border-green-500/50 bg-green-500/10"
+            },
+            {
+                name: "Kiw",
+                role: "Elite Member",
+                image: "https://tr.rbxcdn.com/15b57f202450cd5e1352e82500c526d1/420/420/Image/Png",
+                quote: "Jago Parkour",
+                color: "text-yellow-500 border-yellow-500/50 bg-yellow-500/10"
+            },
+            {
+                name: "Klon",
+                role: "Elite Member",
+                image: "https://tr.rbxcdn.com/15b57f202450cd5e1352e82500c526d1/420/420/Image/Png",
+                quote: "Jago Parkour",
+                color: "text-yellow-500 border-yellow-500/50 bg-yellow-500/10"
+            }
+
+        ];
+
+        // --- 2. FUNGSI RENDER MEMBER ---
+        const memberContainer = document.getElementById('member-container');
+
+        // Cek jika elemen container ada (untuk menghindari error)
+        if (memberContainer) {
+            members.forEach(member => {
+                const card = document.createElement('div');
+                // Styling Card agar sama dengan tema
+                card.className = "bg-rhc-accent rounded-2xl p-6 text-center border border-gray-700 hover:border-rhc-main transition duration-300 transform hover:-translate-y-2 fade-in group shadow-lg";
+                
+                card.innerHTML = `
+                    <div class="relative w-24 h-24 mx-auto mb-4">
+                        <img src="${member.image}" alt="${member.name}" class="w-full h-full rounded-full object-cover border-4 border-gray-800 group-hover:border-rhc-main transition duration-300">
+                        <div class="absolute bottom-0 right-0 bg-gray-900 rounded-full p-1 border border-gray-600">
+                            <i class="fa-solid fa-circle-check text-blue-400 text-sm"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-1">${member.name}</h3>
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-bold mb-3 ${member.color}">
+                        ${member.role}
+                    </span>
+                    <p class="text-gray-400 text-sm italic">"${member.quote}"</p>
+                    <div class="mt-4 flex justify-center space-x-3 opacity-0 group-hover:opacity-100 transition duration-300">
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fa-brands fa-discord"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fa-brands fa-instagram"></i></a>
+                    </div>
+                `;
+                memberContainer.appendChild(card);
+            });
+        }
+
+        // --- 3. TOGGLE MOBILE MENU ---
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+            } else {
+                menu.classList.add('hidden');
+            }
+        }
+
+        // --- 4. SCROLL ANIMATION OBSERVER ---
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Hanya animasi sekali
+                }
+            });
+        }, observerOptions);
+
+        // Jalankan observer setelah halaman & member selesai dimuat
+        document.addEventListener('DOMContentLoaded', () => {
+            // Pilih semua elemen fade-in (termasuk card member yang baru dibuat)
+            document.querySelectorAll('.fade-in').forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>

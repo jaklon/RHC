@@ -29,7 +29,7 @@
     </script>
     
     <style>
-        /* Animasi Fade In sederhana */
+        /* Animasi Fade In */
         .fade-in {
             opacity: 0;
             transform: translateY(20px);
@@ -40,18 +40,18 @@
             transform: translateY(0);
         }
 
+        /* Animasi Infinite Scroll */
         @keyframes scroll {
             0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); } /* Bergerak setengah (karena konten diduplikasi) */
+            100% { transform: translateX(-50%); }
         }
         
         .animate-infinite-scroll {
             display: flex;
-            width: max-content; /* Agar lebar menyesuaikan isi konten */
-            animation: scroll 30s linear infinite; /* 30s = kecepatan (makin kecil makin ngebut) */
+            width: max-content;
+            animation: scroll 30s linear infinite;
         }
 
-        /* Fitur Tambahan: Pause saat kursor diarahkan (biar bisa dibaca) */
         .animate-infinite-scroll:hover {
             animation-play-state: paused;
         }
@@ -63,8 +63,8 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <a href="#home" class="flex-shrink-0 flex items-center">
-    <img src="/images/bgremove.png" alt="Logo RHC" class="h-24 w-auto object-contain">
-</a>
+                    <img src="/images/bgremove.png" alt="Logo RHC" class="h-24 w-auto object-contain">
+                </a>
                 
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-4">
@@ -293,9 +293,9 @@
             <p class="text-red-100 text-lg mb-8">
                 Bergabunglah dengan ratusan member lainnya sekarang juga. Gratis dan terbuka untuk semua player Roblox Indonesia!
             </p>
-            <button onclick="https://discord.gg/mESSWkNK" class="bg-white text-rhc-main px-10 py-4 rounded-full font-bold text-xl shadow-xl hover:bg-gray-100 transition transform hover:scale-105">
+            <a href="https://discord.gg/mESSWkNK" target="_blank" class="inline-block bg-white text-rhc-main px-10 py-4 rounded-full font-bold text-xl shadow-xl hover:bg-gray-100 transition transform hover:scale-105">
                 <i class="fa-brands fa-discord mr-2"></i> Masuk Discord Server
-            </button>
+            </a>
         </div>
     </section>
 
@@ -304,6 +304,12 @@
             <div class="text-center mb-12 fade-in">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Hall of <span class="text-rhc-main">Fame</span></h2>
                 <p class="text-gray-400">Bertemu dengan para punggawa dan member elite RHC.</p>
+            </div>
+
+            <div class="text-center mb-8 fade-in">
+                <button onclick="openAddModal()" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-full font-bold transition shadow-lg transform hover:scale-105">
+                    <i class="fa-solid fa-plus mr-2"></i> Tambah Member Baru
+                </button>
             </div>
 
             <div id="member-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -366,7 +372,7 @@
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="mb-4 md:mb-0">
                     <span class="font-bold text-2xl tracking-tighter">RHC<span class="text-rhc-main">.</span></span>
-                    <p class="text-gray-500 text-sm mt-2">© 2023 Roblox Holic Community. All Rights Reserved.</p>
+                    <p class="text-gray-500 text-sm mt-2">© 2025 Roblox Holic Community. All Rights Reserved.</p>
                 </div>
                 <div class="flex space-x-6">
                     <a href="https://www.tiktok.com/@robloxaholics?is_from_webapp=1&sender_device=pc" class="text-gray-400 hover:text-white text-xl transition"><i class="fa-brands fa-tiktok"></i></a>
@@ -377,69 +383,93 @@
         </div>
     </footer>
 
-<script src="script.js"></script>
+    <script type="module" src="script.js"></script>
 
-<div id="member-modal" class="fixed inset-0 z-[60] hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-        
+    <div id="member-modal" class="fixed inset-0 z-[60] hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
         <div class="fixed inset-0 bg-black/80 backdrop-blur-sm transition-opacity opacity-0" id="modal-backdrop"></div>
-
+    
         <div class="fixed inset-0 z-10 overflow-y-auto">
             <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
-                
-                <div class="relative transform overflow-hidden rounded-2xl bg-rhc-dark border border-gray-700 text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-md opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" id="modal-panel">
+                <div class="relative transform overflow-hidden rounded-2xl bg-rhc-dark border border-gray-700 text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-md opacity-0 translate-y-4" id="modal-panel">
                     
-                    <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white transition z-10">
+                    <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white transition z-20">
                         <i class="fa-solid fa-xmark text-2xl"></i>
                     </button>
-
+    
+                    <button id="btn-edit-mode" onclick="toggleEditMode()" class="absolute top-4 left-4 text-yellow-500 hover:text-white transition z-20 text-sm font-bold">
+                        <i class="fa-solid fa-pen-to-square"></i> Edit
+                    </button>
+    
                     <div class="px-6 pb-6 pt-8">
-                        
-                        <div class="text-center">
-                            <div class="relative w-28 h-28 mx-auto mb-4">
-                                <img id="modal-image" src="" class="w-full h-full rounded-full object-cover border-4 border-rhc-dark ring-2 ring-gray-700">
-                                <div class="absolute bottom-1 right-1 bg-rhc-dark rounded-full p-1.5 border border-gray-600">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Roblox_player_icon_black.svg" class="w-5 h-5 invert">
+                        <form id="crud-form" onsubmit="handleFormSubmit(event)">
+                            <input type="hidden" id="inp-doc-id"> 
+                            
+                            <div class="text-center mb-4">
+                                <div class="relative w-28 h-28 mx-auto mb-2">
+                                    <img id="modal-image" src="" class="w-full h-full rounded-full object-cover border-4 border-rhc-dark ring-2 ring-gray-700">
+                                </div>
+                                <input type="text" id="inp-image" placeholder="Link Avatar URL (Manual)" class="edit-field hidden w-full bg-gray-800 border border-gray-600 rounded px-2 py-1 text-xs text-white mb-2">
+                                <input type="text" id="inp-userid" placeholder="Roblox User ID (Angka)" class="edit-field hidden w-full bg-gray-800 border border-gray-600 rounded px-2 py-1 text-xs text-white">
+                            </div>
+    
+                            <div class="text-center space-y-2">
+                                <h3 id="modal-name" class="view-field text-2xl font-bold text-white">Name</h3>
+                                <input type="text" id="inp-name" placeholder="Nama Member" class="edit-field hidden w-full bg-gray-800 text-white font-bold text-center border border-gray-600 rounded p-1">
+    
+                                <p id="modal-username" class="view-field text-gray-400 text-sm">@username</p>
+                                <input type="text" id="inp-username" placeholder="@Username" class="edit-field hidden w-full bg-gray-800 text-gray-300 text-center text-sm border border-gray-600 rounded p-1">
+    
+                                <div id="role-container">
+                                    <span id="modal-role" class="view-field inline-block px-3 py-1 rounded-full text-xs font-bold bg-gray-800 text-white border border-gray-600">Role</span>
+                                    <select id="inp-role" class="edit-field hidden bg-gray-800 text-white text-xs border border-gray-600 rounded p-1">
+                                        <option value="Founder">Founder</option>
+                                        <option value="Co-Leader">Co-Leader</option>
+                                        <option value="Moderator">Moderator</option>
+                                        <option value="Elite Member">Elite Member</option>
+                                        <option value="Member">Member</option>
+                                    </select>
                                 </div>
                             </div>
-                            <h3 id="modal-name" class="text-2xl font-bold text-white">Name</h3>
-                            <p id="modal-username" class="text-gray-400 text-sm">@username</p>
-                            <span id="modal-role" class="inline-block mt-3 px-3 py-1 rounded-full text-xs font-bold bg-gray-800 text-white border border-gray-600">
-                                Role
-                            </span>
-                        </div>
-
-                        <div class="grid grid-cols-3 gap-2 mt-8 text-center border-y border-gray-800 py-4 bg-black/20 rounded-lg">
-                            <div>
-                                <p id="modal-friends" class="text-lg font-bold text-white">0</p>
-                                <p class="text-xs text-gray-500 uppercase tracking-wide">Friends</p>
+    
+                            <div class="grid grid-cols-3 gap-2 mt-6 text-center border-y border-gray-800 py-4 bg-black/20 rounded-lg">
+                                 <div><p id="modal-friends" class="font-bold text-white">-</p><p class="text-[10px] text-gray-500">FRIENDS</p></div>
+                                 <div><p id="modal-followers" class="font-bold text-white">-</p><p class="text-[10px] text-gray-500">FOLLOWERS</p></div>
+                                 <div><p id="modal-following" class="font-bold text-white">-</p><p class="text-[10px] text-gray-500">FOLLOWING</p></div>
                             </div>
-                            <div>
-                                <p id="modal-followers" class="text-lg font-bold text-white">0</p>
-                                <p class="text-xs text-gray-500 uppercase tracking-wide">Followers</p>
+    
+                            <div class="mt-4">
+                                <h4 class="text-sm font-bold text-rhc-main mb-2 uppercase">About</h4>
+                                <p id="modal-about" class="view-field text-gray-300 text-sm leading-relaxed bg-rhc-accent/50 p-3 rounded-lg border border-gray-700/50">Desc...</p>
+                                <textarea id="inp-about" rows="3" class="edit-field hidden w-full bg-gray-800 text-white text-sm p-2 border border-gray-600 rounded" placeholder="Deskripsi member..."></textarea>
                             </div>
-                            <div>
-                                <p id="modal-following" class="text-lg font-bold text-white">0</p>
-                                <p class="text-xs text-gray-500 uppercase tracking-wide">Following</p>
+                            
+                            <div class="mt-2">
+                                <h4 class="text-sm font-bold text-gray-500 mb-1 uppercase text-[10px]">Quote</h4>
+                                <p id="modal-quote" class="view-field text-gray-400 text-sm italic">"..."</p>
+                                <input type="text" id="inp-quote" class="edit-field hidden w-full bg-gray-800 text-white text-sm p-1 border border-gray-600 rounded" placeholder="Kutipan...">
                             </div>
-                        </div>
-
-                        <div class="mt-6">
-                            <h4 class="text-sm font-bold text-rhc-main mb-2 uppercase">About</h4>
-                            <p id="modal-about" class="text-gray-300 text-sm leading-relaxed bg-rhc-accent/50 p-3 rounded-lg border border-gray-700/50">
-                                Description goes here...
-                            </p>
-                        </div>
-
-                        <div class="mt-8">
-                            <a id="modal-link" href="#" target="_blank" class="flex w-full justify-center rounded-full bg-white px-3 py-3 text-sm font-bold text-rhc-dark shadow-sm hover:bg-gray-200 transition items-center gap-2">
-                                <i class="fa-solid fa-arrow-up-right-from-square"></i> Buka Profil Roblox Asli
-                            </a>
-                        </div>
+    
+                            <div id="action-buttons" class="mt-6 flex gap-3 hidden">
+                                <button type="button" onclick="deleteMember()" class="flex-1 bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg font-bold text-sm">
+                                    <i class="fa-solid fa-trash"></i> Hapus
+                                </button>
+                                <button type="submit" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-bold text-sm">
+                                    <i class="fa-solid fa-save"></i> Simpan
+                                </button>
+                            </div>
+    
+                            <div id="normal-buttons" class="mt-6">
+                                <a id="modal-link" href="#" target="_blank" class="flex w-full justify-center rounded-full bg-white px-3 py-3 text-sm font-bold text-rhc-dark shadow-sm hover:bg-gray-200 transition items-center gap-2">
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Buka Profil Roblox
+                                </a>
+                            </div>
+                        </form>
                     </div>
-
+    
                 </div>
             </div>
         </div>
     </div>
+
 </body>
 </html>

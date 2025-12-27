@@ -5,6 +5,17 @@
 // Data Username, About, dan Stats harus diisi manual di sini.
 const members = [
     {
+        name: "Klon",
+        username: "@Jaklon03",
+        id: "6140465204", 
+        image: "https://tr.rbxcdn.com/30DAY-Avatar-F89C22B77C6EC7A9E35655C2BFB2968C-Png/720/720/Avatar/Webp/noFilter",
+        role: "Elite Member",
+        quote: "Jago Parkour",
+        color: "text-yellow-500 border-yellow-500/50 bg-yellow-500/10",
+        about: "Member yang parkournya jago banget. Sedang grinding summit di Arunika.",
+        stats: { friends: "0", followers: "0", following: "0" }
+    },
+    {
         name: "Syla",
         username: "@SylaKing_01",
         id: "148289855",
@@ -48,17 +59,6 @@ const members = [
         about: "Speedrunner Tower of Hell. Rekor tamat tower 3 menit. Tantang aku kalau berani!",
         stats: { friends: "150", followers: "800", following: "300" }
     },
-    {
-        name: "Klon",
-        username: "@Klon_Clone",
-        id: "6140465204", 
-        image: "https://tr.rbxcdn.com/30DAY-Avatar-F89C22B77C6EC7A9E35655C2BFB2968C-Png/720/720/Avatar/Webp/noFilter",
-        role: "Elite Member",
-        quote: "Jago Parkour",
-        color: "text-yellow-500 border-yellow-500/50 bg-yellow-500/10",
-        about: "Member aktif yang selalu ikut event. Sedang grinding level di Blox Fruits.",
-        stats: { friends: "45", followers: "200", following: "10" }
-    }
 ];
 
 // ==========================================
@@ -227,46 +227,68 @@ async function fetchDiscordMembers() {
     }
 }
 
-// E. FETCH ROBLOX STATS (REAL-TIME VIA PROXY)
+// E. FETCH ROBLOX STATS (VERSI UPDATE: DUAL PROXY)
 async function fetchRobloxStats(userId) {
-    // Element ID di Modal
     const elFriends = document.getElementById('modal-friends');
     const elFollowers = document.getElementById('modal-followers');
     const elFollowing = document.getElementById('modal-following');
 
-    // Set Loading state
+    // Loading State
     elFriends.innerText = "...";
     elFollowers.innerText = "...";
     elFollowing.innerText = "...";
 
+    // Fungsi kecil untuk mencoba fetch
+    const tryFetch = async (url) => {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error('Network error');
+        return res.json();
+    };
+
     try {
-        // Kita gunakan Proxy 'corsproxy.io' untuk menembus keamanan Roblox
-        // Endpoint API Roblox yang digunakan:
-        const proxyBase = "https://corsproxy.io/?";
-        const urlFriends = `${proxyBase}https://friends.roblox.com/v1/users/${userId}/friends/count`;
-        const urlFollowers = `${proxyBase}https://friends.roblox.com/v1/users/${userId}/followers/count`;
-        const urlFollowing = `${proxyBase}https://friends.roblox.com/v1/users/${userId}/followings/count`;
+        // --- DATA FRIENDS (CONNECTIONS) ---
+        // Jalur 1: Pakai corsproxy.io
+        let countFriends = 0;
+        try {
+            const data = await tryFetch(`https://corsproxy.io/?https://friends.roblox.com/v1/users/${userId}/friends/count`);
+            countFriends = data.count;
+        } catch (e) {
+            // Jalur 2 (Cadangan): Pakai allorigins.win
+            console.warn("Jalur 1 Friends gagal, coba jalur 2...");
+            const data = await tryFetch(`https://api.allorigins.win/get?url=${encodeURIComponent(`https://friends.roblox.com/v1/users/${userId}/friends/count`)}`);
+            const parsed = JSON.parse(data.contents);
+            countFriends = parsed.count;
+        }
 
-        // Jalankan 3 request sekaligus (Parallel) agar lebih cepat
-        const [resFriends, resFollowers, resFollowing] = await Promise.all([
-            fetch(urlFriends),
-            fetch(urlFollowers),
-            fetch(urlFollowing)
-        ]);
+        // --- DATA FOLLOWERS ---
+        let countFollowers = 0;
+        try {
+            const data = await tryFetch(`https://corsproxy.io/?https://friends.roblox.com/v1/users/${userId}/followers/count`);
+            countFollowers = data.count;
+        } catch (e) {
+            const data = await tryFetch(`https://api.allorigins.win/get?url=${encodeURIComponent(`https://friends.roblox.com/v1/users/${userId}/followers/count`)}`);
+            const parsed = JSON.parse(data.contents);
+            countFollowers = parsed.count;
+        }
 
-        // Ambil JSON
-        const dataFriends = await resFriends.json();
-        const dataFollowers = await resFollowers.json();
-        const dataFollowing = await resFollowing.json();
+        // --- DATA FOLLOWING ---
+        let countFollowing = 0;
+        try {
+            const data = await tryFetch(`https://corsproxy.io/?https://friends.roblox.com/v1/users/${userId}/followings/count`);
+            countFollowing = data.count;
+        } catch (e) {
+            const data = await tryFetch(`https://api.allorigins.win/get?url=${encodeURIComponent(`https://friends.roblox.com/v1/users/${userId}/followings/count`)}`);
+            const parsed = JSON.parse(data.contents);
+            countFollowing = parsed.count;
+        }
 
-        // Update Tampilan Modal (Format angka ribuan, misal 1200 jadi 1.2K)
-        elFriends.innerText = formatNumber(dataFriends.count);
-        elFollowers.innerText = formatNumber(dataFollowers.count);
-        elFollowing.innerText = formatNumber(dataFollowing.count);
+        // Update UI
+        elFriends.innerText = formatNumber(countFriends);
+        elFollowers.innerText = formatNumber(countFollowers);
+        elFollowing.innerText = formatNumber(countFollowing);
 
     } catch (error) {
-        console.error("Gagal ambil stats Roblox:", error);
-        // Jika gagal, biarkan angka manual atau tampilkan "-"
+        console.error("Gagal total ambil stats Roblox:", error);
         elFriends.innerText = "-";
         elFollowers.innerText = "-";
         elFollowing.innerText = "-";

@@ -16,6 +16,28 @@ const members = [
         stats: { friends: "0", followers: "0", following: "0" }
     },
     {
+        name: "Kiw",
+        username: "@pinkkiwu",
+        id: "8815577289", 
+        image: "https://tr.rbxcdn.com/30DAY-Avatar-ECAEC390859BEF8123640D5CD3AF48D8-Png/720/720/Avatar/Webp/noFilter",
+        role: "Elite Member",
+        quote: "Jago Parkour",
+        color: "text-yellow-500 border-yellow-500/50 bg-yellow-500/10",
+        about: "Speedrunner Tower of Hell. Rekor tamat tower 3 menit. Tantang aku kalau berani!",
+        stats: { friends: "0", followers: "0", following: "0" }
+    },
+    {
+        name: "Tequilla",
+        username: "@Labubu_ikirek",
+        id: "8873225564", 
+        image: "https://tr.rbxcdn.com/30DAY-Avatar-EFC49127318A4F6DF60F3F28BB81D824-Png/720/720/Avatar/Webp/noFilter",
+        role: "Moderator",
+        quote: "Pantau chat 24 jam",
+        color: "text-green-500 border-green-500/50 bg-green-500/10",
+        about: "Suka main Brookhaven dan Adopt Me. Jangan lupa baca rules sebelum chat ya guys!",
+        stats: { friends: "0", followers: "0", following: "0" }
+    },
+    {
         name: "Syla",
         username: "@SylaKing_01",
         id: "148289855",
@@ -24,13 +46,13 @@ const members = [
         quote: "King of Blox Fruits",
         color: "text-red-500 border-red-500/50 bg-red-500/10",
         about: "Founder RHC sejak 2020. Fokus main Blox Fruits dan membesarkan komunitas. Sering live streaming tiap malam minggu.",
-        stats: { friends: "200", followers: "12.5K", following: "15" }
+        stats: { friends: "0", followers: "0", following: "0" }
     },
     {
         name: "Mbonn",
-        username: "@Mbonn_Jago",
-        id: "12345678", 
-        image: "https://tr.rbxcdn.com/5f7776512684803d5204481308332185/420/420/Image/Png",
+        username: "@kookyeonso0o",
+        id: "8815371704", 
+        image: "https://tr.rbxcdn.com/30DAY-Avatar-D8DAB6965C82BADBD57FA8C29DBDF48D-Png/720/720/Avatar/Webp/noFilter",
         role: "Co-Leader",
         quote: "Admin paling galak",
         color: "text-blue-500 border-blue-500/50 bg-blue-500/10",
@@ -49,22 +71,55 @@ const members = [
         stats: { friends: "50", followers: "1.1K", following: "20" }
     },
     {
-        name: "Kiw",
-        username: "@Kiw_Parkour",
-        id: "11223344", 
-        image: "https://tr.rbxcdn.com/15b57f202450cd5e1352e82500c526d1/420/420/Image/Png",
-        role: "Elite Member",
-        quote: "Jago Parkour",
-        color: "text-yellow-500 border-yellow-500/50 bg-yellow-500/10",
-        about: "Speedrunner Tower of Hell. Rekor tamat tower 3 menit. Tantang aku kalau berani!",
-        stats: { friends: "150", followers: "800", following: "300" }
+        name: "Mott",
+        username: "@Ellevatia",
+        id: "87654321", 
+        image: "https://tr.rbxcdn.com/30DAY-Avatar-6D36128F7DBCD8BA7AC47AE4839D191F-Png/720/720/Avatar/Webp/noFilter",
+        role: "Moderator",
+        quote: "Pantau chat 24 jam",
+        color: "text-green-500 border-green-500/50 bg-green-500/10",
+        about: "Suka main Brookhaven dan Adopt Me. Jangan lupa baca rules sebelum chat ya guys!",
+        stats: { friends: "0", followers: "0", following: "0" }
+    },
+];
+
+// ==========================================
+// 1.B DATA COUPLE (Baru)
+// ==========================================
+const couples = [
+    {
+        shipName: "Kiw & Mott",
+        title: "Best Friend Forever",
+        date: "Est. 2024",
+        // Masukkan ID Roblox (Angka) Pria & Wanita
+        maleId: "3187189414",
+        maleImage: "https://tr.rbxcdn.com/30DAY-Avatar-6D36128F7DBCD8BA7AC47AE4839D191F-Png/720/720/Avatar/Webp/noFilter", 
+        femaleId: "8815577289",
+        femaleImage: "https://tr.rbxcdn.com/30DAY-Avatar-ECAEC390859BEF8123640D5CD3AF48D8-Png/720/720/Avatar/Webp/noFilter",
+        color: "from-pink-500 to-purple-600" // Warna gradasi border
+    },
+    {
+        shipName: "Mbonn & Montee",
+        title: "King & Queen of AFK",
+        date: "Est. 2023",
+        maleId: "12345678",
+        femaleId: "87654321",
+        color: "from-red-500 to-orange-500"
+    },
+    {
+        shipName: "Tequilla & Nchippp",
+        title: "Prince & Princess of RHC",
+        date: "Est. 2023",
+        maleId: "12345678",
+        femaleId: "87654321",
+        color: "from-red-500 to-orange-500"
     },
 ];
 
 // ==========================================
 // 2. CONFIG & HELPERS
 // ==========================================
-const DISCORD_SERVER_ID = 'MASUKKAN_ID_DISCORD_DISINI'; 
+const DISCORD_SERVER_ID = '1400102592436113448'; 
 const DEFAULT_AVATAR = 'https://tr.rbxcdn.com/53eb9b17fe1432a809c73a13889b5006/420/420/Image/Png';
 
 // ==========================================
@@ -295,6 +350,59 @@ async function fetchRobloxStats(userId) {
     }
 }
 
+// F. RENDER COUPLE SECTION (Updated)
+function renderCouples() {
+    const container = document.getElementById('couple-container');
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    couples.forEach(couple => {
+        const card = document.createElement('div');
+        // Layout Kartu
+        card.className = "relative group bg-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-6 hover:border-pink-500 transition duration-500 fade-in overflow-hidden";
+        
+        card.innerHTML = `
+            <div class="absolute inset-0 bg-gradient-to-r ${couple.color} opacity-0 group-hover:opacity-10 transition duration-500"></div>
+            
+            <div class="flex justify-center items-center mb-6 relative">
+                
+                <div class="relative z-10 w-20 h-20 -mr-4 transition-transform duration-300 group-hover:-translate-x-2 group-hover:-rotate-6 cursor-pointer" onclick="window.open('https://www.roblox.com/users/${couple.maleId}/profile', '_blank')">
+                    <img 
+                        src="${couple.maleImage}" 
+                        onerror="this.src='${DEFAULT_AVATAR}'" 
+                        class="w-full h-full rounded-full border-4 border-gray-900 object-cover shadow-lg"
+                        title="Klik untuk profil cowok"
+                    >
+                </div>
+                
+                <div class="z-20 bg-gray-900 rounded-full p-1.5 border-2 border-pink-500 animate-pulse">
+                    <i class="fa-solid fa-heart text-pink-500 text-lg"></i>
+                </div>
+
+                <div class="relative z-0 w-20 h-20 -ml-4 transition-transform duration-300 group-hover:translate-x-2 group-hover:rotate-6 cursor-pointer" onclick="window.open('https://www.roblox.com/users/${couple.femaleId}/profile', '_blank')">
+                    <img 
+                        src="${couple.femaleImage}" 
+                        onerror="this.src='${DEFAULT_AVATAR}'" 
+                        class="w-full h-full rounded-full border-4 border-gray-900 object-cover shadow-lg"
+                        title="Klik untuk profil cewek"
+                    >
+                </div>
+
+            </div>
+
+            <div class="text-center relative z-10">
+                <h3 class="text-xl font-bold text-white mb-1 group-hover:text-pink-400 transition">${couple.shipName}</h3>
+                <span class="inline-block px-3 py-1 text-xs font-bold text-white bg-gradient-to-r ${couple.color} rounded-full mb-2 shadow-lg">
+                    ${couple.title}
+                </span>
+                <p class="text-gray-500 text-xs italic"><i class="fa-regular fa-calendar mr-1"></i> ${couple.date}</p>
+            </div>
+        `;
+        container.appendChild(card);
+    });
+}
+
 // Helper: Format Angka (1500 -> 1.5K)
 function formatNumber(num) {
     if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
@@ -304,6 +412,7 @@ function formatNumber(num) {
 
 document.addEventListener('DOMContentLoaded', () => {
     renderMembers();
+    renderCouples();
     fetchDiscordMembers();
     setInterval(fetchDiscordMembers, 60000);
 

@@ -404,13 +404,20 @@
                         <form id="crud-form" onsubmit="handleFormSubmit(event)">
                             <input type="hidden" id="inp-doc-id"> 
                             
-                            <div class="text-center mb-4">
-                                <div class="relative w-28 h-28 mx-auto mb-2">
-                                    <img id="modal-image" src="" class="w-full h-full rounded-full object-cover border-4 border-rhc-dark ring-2 ring-gray-700">
-                                </div>
-                                <input type="text" id="inp-image" placeholder="Link Avatar URL (Manual)" class="edit-field hidden w-full bg-gray-800 border border-gray-600 rounded px-2 py-1 text-xs text-white mb-2">
-                                <input type="text" id="inp-userid" placeholder="Roblox User ID (Angka)" class="edit-field hidden w-full bg-gray-800 border border-gray-600 rounded px-2 py-1 text-xs text-white">
+                            <div class="text-center mb-4 relative">
+                            <div class="absolute right-0 -top-2 z-30 hidden edit-field">
+                                <button type="button" onclick="openHelpModal()" class="text-[10px] bg-yellow-500/10 text-yellow-500 border border-yellow-500/50 hover:bg-yellow-500 hover:text-black px-2 py-1 rounded-full transition flex items-center gap-1">
+                                    <i class="fa-solid fa-circle-info"></i> Bantuan
+                                </button>
                             </div>
+
+                            <div class="relative w-28 h-28 mx-auto mb-2">
+                                <img id="modal-image" src="" class="w-full h-full rounded-full object-cover border-4 border-rhc-dark ring-2 ring-gray-700">
+                            </div>
+                            
+                            <input type="text" id="inp-image" placeholder="Link Avatar URL (Manual)" class="edit-field hidden w-full bg-gray-800 border border-gray-600 rounded px-2 py-1 text-xs text-white mb-2 focus:border-rhc-main focus:outline-none transition">
+                            <input type="text" id="inp-userid" placeholder="Roblox User ID (Angka)" class="edit-field hidden w-full bg-gray-800 border border-gray-600 rounded px-2 py-1 text-xs text-white focus:border-rhc-main focus:outline-none transition">
+                        </div>
     
                             <div class="text-center space-y-2">
                                 <h3 id="modal-name" class="view-field text-2xl font-bold text-white">Name</h3>
@@ -470,6 +477,70 @@
             </div>
         </div>
     </div>
+
+    <div id="help-modal" class="fixed inset-0 z-[70] hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div class="fixed inset-0 bg-black/90 backdrop-blur-md transition-opacity" onclick="closeHelpModal()"></div>
+
+    <div class="fixed inset-0 z-10 overflow-y-auto">
+        <div class="flex min-h-full items-center justify-center p-4 text-center">
+            <div class="relative transform overflow-hidden rounded-2xl bg-rhc-dark border border-gray-600 text-left shadow-2xl transition-all sm:w-full sm:max-w-lg">
+                
+                <div class="bg-rhc-accent px-6 py-4 border-b border-gray-700 flex justify-between items-center">
+                    <h3 class="text-lg font-bold text-white"><i class="fa-solid fa-circle-question text-yellow-500 mr-2"></i> Panduan Data Roblox</h3>
+                    <button onclick="closeHelpModal()" class="text-gray-400 hover:text-white">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+
+                <div class="px-6 py-6 space-y-6">
+                    
+                    <div class="bg-black/30 p-4 rounded-lg border border-gray-700">
+                        <h4 class="text-rhc-main font-bold mb-2 flex items-center">
+                            <span class="bg-rhc-main text-white w-6 h-6 rounded-full flex items-center justify-center text-xs mr-2">1</span> 
+                            Cara Ambil Roblox User ID
+                        </h4>
+                        <p class="text-gray-300 text-xs mb-3">Buka profil Roblox member di browser, lalu lihat link di atas (URL bar).</p>
+                        <div class="bg-gray-900 p-2 rounded text-xs font-mono text-gray-400 break-all border border-gray-700">
+                            roblox.com/users/<span class="text-green-400 font-bold bg-green-900/30 px-1 rounded">12345678</span>/profile
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-1">*Copy angka yang berwarna hijau saja.</p>
+                    </div>
+
+                    <div class="bg-black/30 p-4 rounded-lg border border-gray-700">
+                        <h4 class="text-blue-400 font-bold mb-2 flex items-center">
+                            <span class="bg-blue-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs mr-2">2</span> 
+                            Cara Ambil Link Avatar (Gambar)
+                        </h4>
+                        <p class="text-gray-300 text-xs mb-2">Masuk ke Profil Roblox -> <b>Klik Kanan</b> pada gambar kepala/avatar member.</p>
+                        <ul class="text-xs text-gray-400 list-disc list-inside space-y-1 ml-2">
+                            <li>Chrome/Edge: Pilih <b>"Copy Image Address"</b> (Salin Alamat Gambar).</li>
+                            <li>Firefox: Pilih <b>"Copy Image Link"</b>.</li>
+                            <li>HP: Tahan gambar lama -> Buka di tab baru -> Copy Link.</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <div class="bg-rhc-accent px-6 py-3 sm:flex sm:flex-row-reverse border-t border-gray-700">
+                    <button type="button" onclick="closeHelpModal()" class="w-full inline-flex justify-center rounded-lg border border-transparent bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-200 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">
+                        Mengerti
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // FUNGSI MODAL BANTUAN
+    function openHelpModal() {
+        document.getElementById('help-modal').classList.remove('hidden');
+    }
+
+    function closeHelpModal() {
+        document.getElementById('help-modal').classList.add('hidden');
+    }
+</script>
 
 </body>
 </html>

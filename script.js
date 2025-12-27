@@ -150,17 +150,29 @@ window.deleteMember = async function() {
 }
 
 // ==========================================
-// 4. UI RENDER FUNCTIONS
+// 4. UI RENDER FUNCTIONS (FIXED ANIMATION)
 // ==========================================
 
 function renderMembersUI() {
     const container = document.getElementById('member-container');
+    if (!container) return;
+    
     container.innerHTML = '';
 
     if (membersData.length === 0) {
         container.innerHTML = '<p class="text-gray-500 text-center col-span-full py-10">Belum ada member di database. Klik tombol "Tambah Member" di atas.</p>';
         return;
     }
+
+    // --- SETUP OBSERVER ANIMASI ---
+    const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                obs.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
 
     membersData.forEach((member) => {
         // Tentukan warna berdasarkan role
@@ -171,9 +183,9 @@ function renderMembersUI() {
         if(member.role === 'Elite Member') colorClass = "text-yellow-500 border-yellow-500/50 bg-yellow-500/10";
 
         const card = document.createElement('div');
+        // Tetap pakai class 'fade-in' agar animasi jalan
         card.className = "bg-rhc-accent rounded-2xl p-6 text-center border border-gray-700 hover:border-rhc-main transition duration-300 transform hover:-translate-y-2 fade-in group shadow-lg cursor-pointer flex flex-col items-center justify-between h-full";
         
-        // Klik card membuka modal berdasarkan ID Database
         card.onclick = () => openModal(member.id);
 
         card.innerHTML = `
@@ -197,6 +209,9 @@ function renderMembersUI() {
             </div>
         `;
         container.appendChild(card);
+        
+        // [PENTING] Langsung jalankan observer untuk kartu ini
+        observer.observe(card);
     });
 }
 
